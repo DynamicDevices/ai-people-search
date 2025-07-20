@@ -17,10 +17,10 @@ jobs:
           node-version: '20'
       - name: Install dependencies
         run: |
-          npm install -g eslint stylelint htmlhint
+          npm ci
       - name: Lint JS
-        run: eslint frontend/app.js
+        run: npx eslint frontend/app.js
       - name: Lint CSS
-        run: stylelint "frontend/*.css"
+        run: npx stylelint "frontend/*.css"
       - name: Lint HTML
-        run: htmlhint frontend/index.html 
+        run: npx htmlhint frontend/index.html 
