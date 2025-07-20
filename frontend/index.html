@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Search for details on private individuals (demo, mock data)">
+  <title>People Search</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>People Search</h1>
+    <form id="searchForm" autocomplete="off">
+      <label for="query">Name:</label>
+      <input type="text" id="query" name="query" required placeholder="Enter a name...">
+      <button type="submit">Search</button>
+    </form>
+    <section id="results" aria-live="polite"></section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html> 
