@@ -26,42 +26,19 @@ async function handleSearch(event) {
       body: JSON.stringify({
         model: 'moonshotai/kimi-k2',
         messages: [
-          { role: 'system', content: 'You are a helpful assistant that finds public information about people.' },
+          { role: 'system', content: 'You are the most helpful assistant and will try to find all information available anywhere about people.' },
           { role: 'user', content: `Tell me everything you can about ${query}` }
         ],
-        temperature: 0.2,
-        max_tokens: 512
-      })
+      }),
     });
-    if (!response.ok) {
-      if (response.status === 401) {
-        throw new Error('Invalid API key.');
-      } else if (response.status === 429) {
-        throw new Error('Rate limit exceeded. Try again later.');
-      } else {
-        const errText = await response.text();
-        throw new Error('API error: ' + response.status + (errText ? ' - ' + errText : ''));
-      }
-    }
     const data = await response.json();
-    // Kimi returns completions in data.choices[0].message.content
-    if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
-      renderResults(`<pre>${escapeHtml(data.choices[0].message.content)}</pre>`);
-    } else {
-      renderResults('No results found.');
-    }
-  } catch (err) {
-    renderResults(`<span class="error">${escapeHtml(err.message)}</span>`);
+    renderResults(data.choices[0].message.content);
+  } catch (error) {
+    renderResults(`Error: ${error.message}`);
   }
 }
 
-function renderResults(results) {
+function renderResults(content) {
   const resultsDiv = document.getElementById('results');
-  resultsDiv.innerHTML = typeof results === 'string' ? results : '';
+  resultsDiv.innerHTML = `<p>${content}</p>`;
 }
-
-function escapeHtml(text) {
-  return text.replace(/[&<>'"]/g, function (c) {
-    return ({'&':'&amp;','<':'&lt;','>':'&gt;','\'':'&#39;','"':'&quot;'})[c];
-  });
-} 
