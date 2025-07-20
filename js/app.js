@@ -27,7 +27,7 @@ async function handleSearch(event) {
         model: 'moonshotai/kimi-k2',
         messages: [
           { role: 'system', content: 'You are a helpful assistant that finds public information about people.' },
-          { role: 'user', content: `Find details about this person: ${query}` }
+          { role: 'user', content: `Tell me everything you can about ${query}` }
         ],
         temperature: 0.2,
         max_tokens: 512
