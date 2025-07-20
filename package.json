@@ -1,0 +1,27 @@
+{
+  "name": "ai-people-search",
+  "version": "1.0.0",
+  "description": "A simple, mobile-friendly static website that allows users to search for details on private individuals using an AI-powered people search API (no data is retained, no mock data is used). Designed for deployment on GitHub Pages.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DynamicDevices/ai-people-search.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DynamicDevices/ai-people-search/issues"
+  },
+  "homepage": "https://github.com/DynamicDevices/ai-people-search#readme",
+  "type": "module",
+  "devDependencies": {
+    "@eslint/js": "^9.31.0",
+    "eslint": "^9.31.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.3.0"
+  }
+}
