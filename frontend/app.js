@@ -1,34 +1,11 @@
 const API_ENDPOINT = 'https://api.moonshot.cn/v1/chat/completions';
 let userApiKey = '';
 
-// Show instructions and warning on the main page
-window.addEventListener('DOMContentLoaded', () => {
-  const instructions = document.createElement('section');
-  instructions.id = 'instructions';
-  instructions.innerHTML = `
-    <h2>How to Use</h2>
-    <ol>
-      <li>Get your Kimi API key from <a href="https://platform.moonshot.cn/" target="_blank" rel="noopener">Kimi Open Platform</a> (see README for details).</li>
-      <li>Enter your API key below. <strong>Your key is never stored and is only used for your current session.</strong></li>
-      <li>Enter a name to search and submit.</li>
-    </ol>
-    <p class="warning"><strong>Warning:</strong> If you use this site as a static page, your API key is visible to your browser and could be exposed. Do not use sensitive or production keys here.</p>
-  `;
-  document.body.insertBefore(instructions, document.body.firstChild);
-
-  // Add API key input
-  const apiKeyDiv = document.createElement('div');
-  apiKeyDiv.id = 'api-key-div';
-  apiKeyDiv.innerHTML = `
-    <label for="apiKey">Kimi API Key:</label>
-    <input type="password" id="apiKey" name="apiKey" required placeholder="Paste your Kimi API key here..." autocomplete="off" style="width: 100%; max-width: 400px;">
-  `;
-  document.body.insertBefore(apiKeyDiv, instructions.nextSibling);
-
-  document.getElementById('apiKey').addEventListener('input', (e) => {
-    userApiKey = e.target.value.trim();
-  });
+document.getElementById('apiKey').addEventListener('input', (e) => {
+  userApiKey = e.target.value.trim();
 });
+
+document.getElementById('searchForm').addEventListener('submit', handleSearch);
 
 async function handleSearch(event) {
   event.preventDefault();
@@ -73,8 +50,6 @@ async function handleSearch(event) {
     renderResults(`<span class="error">${escapeHtml(err.message)}</span>`);
   }
 }
-
-document.getElementById('searchForm').addEventListener('submit', handleSearch);
 
 function renderResults(results) {
   const resultsDiv = document.getElementById('results');
