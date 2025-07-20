@@ -19,8 +19,8 @@ jobs:
         run: |
           npm ci
       - name: Lint JS
-        run: npx eslint frontend/app.js
+        run: npx eslint js/app.js
       - name: Lint CSS
-        run: npx stylelint "frontend/*.css"
+        run: npx stylelint "css/*.css"
       - name: Lint HTML
-        run: npx htmlhint frontend/index.html 
+        run: npx htmlhint index.html 
