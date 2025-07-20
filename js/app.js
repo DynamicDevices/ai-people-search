@@ -24,10 +24,13 @@ async function handleSearch(event) {
         'Authorization': `Bearer ${userApiKey}`
       },
       body: JSON.stringify({
-        model: 'moonshot-v1-8k',
+        model: 'moonshotai/kimi-k2',
         messages: [
+          { role: 'system', content: 'You are a helpful assistant that finds public information about people.' },
           { role: 'user', content: `Find details about this person: ${query}` }
-        ]
+        ],
+        temperature: 0.2,
+        max_tokens: 512
       })
     });
     if (!response.ok) {
@@ -36,7 +39,8 @@ async function handleSearch(event) {
       } else if (response.status === 429) {
         throw new Error('Rate limit exceeded. Try again later.');
       } else {
-        throw new Error('API error: ' + response.status);
+        const errText = await response.text();
+        throw new Error('API error: ' + response.status + (errText ? ' - ' + errText : ''));
       }
     }
     const data = await response.json();
