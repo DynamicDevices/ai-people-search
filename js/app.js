@@ -32,7 +32,14 @@ async function handleSearch(event) {
       }),
     });
     const data = await response.json();
-    renderResults(data.choices[0].message.content);
+    // Kimi returns completions in data.choices[0].message.content
+    if (Array.isArray(data.choices) && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
+      renderResults(`<pre>${escapeHtml(data.choices[0].message.content)}</pre>`);
+    } else if (data.error && data.error.message) {
+      renderResults(`<span class="error">${escapeHtml(data.error.message)}</span>`);
+    } else {
+      renderResults('No results found or unexpected API response.');
+    }
   } catch (error) {
     renderResults(`Error: ${error.message}`);
   }
